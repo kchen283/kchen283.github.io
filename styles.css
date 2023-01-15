@@ -78,7 +78,7 @@ p {
   cursor:grab;
 }
 
- a, a:hover, a:focus, a:active {
+ a, a:hover, a:focus, a:active, a:visited{
       text-decoration: none;
       color: inherit;
  }
@@ -110,13 +110,12 @@ h1 {
     
   .footer {
     text-align: center;
-    position: static;
     width: 100%;
+    bottom: 0;
+    padding-bottom: 10px;
+    position: fixed;
   }
 
   .footer p {
     padding-bottom: 0;
-    bottom: 0;
-    position: fixed;
-	  
   }
