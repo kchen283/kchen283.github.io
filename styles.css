@@ -116,4 +116,7 @@ h1 {
 
   .footer p {
     padding-bottom: 0;
+    bottom: 0;
+    position: fixed;
+	  
   }
