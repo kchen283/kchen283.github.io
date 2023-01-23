@@ -56,13 +56,16 @@ header {
 
 body {
   background-color: hsl(44, 60%, 95%);
+  scroll-behavior: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 } 
 
 p {
   text-align: center;
   padding-bottom: 25px;
 }
-
 
 .title {
   font-size: 40px;
@@ -71,7 +74,6 @@ p {
   color: white;
   padding-top: 20px;
   padding-bottom: 20px;
-  /* <a href="personalwebsite.html">link text</a> */
 }
 
 .title span:hover{
@@ -82,6 +84,22 @@ p {
       text-decoration: none;
       color: inherit;
  }
+
+ .section1{
+  background-color:hsl(0, 0%, 100%);
+  height: 60vh;
+  font-size: 35px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30vh;
+  padding-left: 50px;
+  padding-right: 50px;
+  line-height: 50px;
+}
+
+.section1Text {
+  font-size: 25px;
+}
 
 .container {
   display:flex;
@@ -113,7 +131,8 @@ h1 {
     width: 100%;
     bottom: 0;
     padding-bottom: 10px;
-    position: fixed;
+    position: relative;
+    margin-top: auto;
   }
 
   .footer p {
