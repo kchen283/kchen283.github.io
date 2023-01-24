@@ -7,6 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="icon" type="image/x-icon" href="4900_10_06.jpg">
+        <script src="https://kit.fontawesome.com/28ce45e6c4.js" crossorigin="anonymous"></script>
         <script src="script.js"> </script>
 
         <title> Keri Chen</title>
@@ -18,10 +19,13 @@
        </div>
 
        <div class = "section1" >
-        <p id = "section1Text"></p>
+            <p id = "section1Text"></p>
+            <div class = "chevron">
+                <i onclick = "scrollDoc()" class="fa-solid fa-chevron-down fa-bounce" ></i>
+            </div>
        </div>
 
-       <div class = "container" >
+       <div class = "container" onload = setTimeout(scroll(),5000)>
             <div class = "img">
                 <img src = "0989FCE8-0224-4822-83AC-0D7B931FC8A4.jpg"> 
             </div>
