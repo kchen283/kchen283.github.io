@@ -49,6 +49,18 @@ table {
 
 /* End CSS Reset */
 
+@media screen and (max-width:500px) {
+  /* For mobile phones: */
+   .container {
+      position: relative;
+      display: inline-block;
+      flex-direction: column;
+  }
+  .img {
+    padding-bottom: 25px;
+  }
+}
+
 header {
     text-align: center;
     font-size: 30px;
