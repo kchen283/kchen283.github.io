@@ -21,7 +21,7 @@ function typeWriter() {
 }
 
 function scrollDoc() { 
-  window.scrollBy(0, 700);
+  window.scrollBy(0, 750);
 
 }
 
