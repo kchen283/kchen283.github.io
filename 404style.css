@@ -1,0 +1,18 @@
+html,body { 
+    height: 100%;
+}
+
+h1 {
+    text-align: center; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 45vh;
+    font: 100px;
+}
+
+h2 {
+    text-align: center; 
+    align-items: center; 
+    justify-content: center; 
+    font: 75px;
+}
