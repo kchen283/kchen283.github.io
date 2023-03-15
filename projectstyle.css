@@ -49,18 +49,6 @@ table {
 
 /* End CSS Reset */
 
-@media screen and (max-width:500px) {
-  /* For mobile phones: */
-   .container {
-      position: relative;
-      display: inline-block;
-      flex-direction: column;
-  }
-  .img {
-    padding-bottom: 25px;
-  }
-}
-
 header {
     text-align: center;
     font-size: 30px;
@@ -89,7 +77,7 @@ p {
 }
 
 a {
-  color: #bfa9e0;
+  color: green;
 }
 .topnav {
   font-size: 40px;
@@ -133,8 +121,8 @@ a {
   justify-content: center;
   flex-direction: column;
   line-height: 25px;
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: 25%;
+  padding-right: 25%;
 }
 
 img {
@@ -144,28 +132,55 @@ img {
   padding-bottom: 25px;
 }
 
+.screencontainer {
+  display: inline-flex;
+  align-items: left;
+  text-align: left;
+  justify-content: center;
+  flex-direction: row;
+  line-height: 25px;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+.screen {
+  max-width: 200px;
+  height: auto;
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 h1 {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 32px;
-  color:rgb(94, 9, 9);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 30px;
+  color:black;
 }
 
 h2 {
   font-size: 24px;
+  padding-bottom: 15px;
+  color: black;
+}
+
+.text-link {
+  text-decoration: underline;
+  color: black;
 }
 
 p {
   text-align: left;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: lighter;
-
 }
 
 ul.b {
-  list-style-type: square;
-  padding-left: 25px;
-  font-size: 18px;
+  list-style-type: dashed;
+  padding-left: 35px;
+  padding-top: 0px;
+  font-size: 16px;
+  font-weight: 1;
+  line-height: 16px;
 }
 
 .footer {
@@ -181,4 +196,26 @@ ul.b {
   .footer p {
     padding-bottom: 0;
     text-align: center;
+  }
+
+  @media screen and (max-width:480px) {
+    /* For mobile phones: */
+     .container {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+    .img {
+      padding-bottom: 15px;
+    } 
+
+    .screencontainer {
+      display: inline-flex;
+      align-items: left;
+      text-align: left;
+      justify-content: center;
+      flex-direction: column;
+      line-height: 25px;
+      padding-left: 25%;
+      padding-right: 25%;
+    }
   }
