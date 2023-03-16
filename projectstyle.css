@@ -161,7 +161,10 @@ a {
 }
 
 .container2 {
+  display: flex;
+  align-items: center;
   text-align: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
 }
@@ -175,8 +178,13 @@ img {
 
 .highfid {
   height: auto;
-  max-width: 75%;
+  max-width: 35%;
+  padding-right: 10px;
+  padding-left: 10px;
   padding-bottom: 25px;
+  display: block;
+  justify-content: center;
+  text-align: center;
 }
 
 .screencontainer {
