@@ -149,6 +149,20 @@ a {
   float: right;
 }
 
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: white;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #FF3008;
+}
+
 .container {
   display: flex;
   align-items: left;

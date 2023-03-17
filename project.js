@@ -19,3 +19,12 @@ $(document).ready(function() {
       $("html, body").animate({ scrollTop: 0 }, "slow");
     });
   });
+
+  $(document).ready(function() {
+    $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
+      var height = $(document).height() - $(window).height();
+      var progress = (scroll / height) * 100;
+      $(".progress-bar").css("width", progress + "%");
+    });
+  });
