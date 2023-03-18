@@ -80,12 +80,11 @@ p {
 }
 
 .headerimg {
-  width: 150px;
+  width: 100px;
   height: auto;
   margin-top: -35px;
-  margin-left: -35px;
   float: left;
-  margin-right: -55px;
+  overflow: hidden;
 }
 
 a {
