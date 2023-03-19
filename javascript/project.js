@@ -28,3 +28,27 @@ $(document).ready(function() {
       $(".progress-bar").css("width", progress + "%");
     });
   });
+
+$(document).ready(function() {
+  $('.image').click(function() {
+    // Get the URL of the clicked image
+    var imageSrc = $(this).attr('src');
+
+    // Set the URL of the expanded image to the URL of the clicked image
+    $('.image-expanded img').attr('src', imageSrc);
+
+    // Get the expanded image and set it to visible
+    $('.image-expanded').addClass('visible');
+
+    // Disable scrolling on the body while the image is expanded
+    $('body').css('overflow', 'hidden');
+  });
+
+  $('.close-button').click(function() {
+    // Get the expanded image and set it to invisible
+    $('.image-expanded').removeClass('visible');
+
+    // Enable scrolling on the body again
+    $('body').css('overflow', 'auto');
+  });
+});
