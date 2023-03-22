@@ -56,7 +56,7 @@ header {
 }
 
 body {
-  background-color: hsl(44, 60%, 95%);
+  background-color: white;
   scroll-behavior: auto;
   min-height: 100vh;
   display: flex;
