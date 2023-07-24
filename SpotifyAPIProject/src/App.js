@@ -3,14 +3,16 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
+require('dotenv').config()
 
-const CLIENT_ID = "5ff1d06892a8474ca53ee46f014aff9d";
-const CLIENT_SECRET = "27298f5b56a041d0b22e363dd45384f7";
 
 function App() {
+  const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
+  const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
+
 
   useEffect(()=> {
     //API Access Token 
@@ -19,7 +21,7 @@ function App() {
       headers: {
         'Content-Type':'application/x-www-form-urlencoded'
       },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret='+ CLIENT_SECRET
+      body: 'grant_type=client_credentials&client_id=' + process.env.REACT_APP_SPOTIFY_CLIENT_ID + '&client_secret='+ process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
     }
 
     fetch('https://accounts.spotify.com/api/token',authParam)
