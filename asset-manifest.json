@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/SpotifyAPIProject/static/css/main.a34d7f2f.css",
-    "main.js": "/SpotifyAPIProject/static/js/main.044ecad8.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/SpotifyAPIProject/static/js/787.c4e7f8f9.chunk.js",
-    "static/media/logo.svg": "/SpotifyAPIProject/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/SpotifyAPIProject/index.html",
-    "main.a34d7f2f.css.map": "/SpotifyAPIProject/static/css/main.a34d7f2f.css.map",
-    "main.044ecad8.js.map": "/SpotifyAPIProject/static/js/main.044ecad8.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/SpotifyAPIProject/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/kchen283.github.io/SpotifyAPIProject/static/css/main.a34d7f2f.css",
+    "main.js": "/kchen283.github.io/SpotifyAPIProject/static/js/main.9d605c61.js",
+    "static/js/787.00ef52c5.chunk.js": "/kchen283.github.io/SpotifyAPIProject/static/js/787.00ef52c5.chunk.js",
+    "static/media/logo.svg": "/kchen283.github.io/SpotifyAPIProject/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/kchen283.github.io/SpotifyAPIProject/index.html",
+    "main.a34d7f2f.css.map": "/kchen283.github.io/SpotifyAPIProject/static/css/main.a34d7f2f.css.map",
+    "main.9d605c61.js.map": "/kchen283.github.io/SpotifyAPIProject/static/js/main.9d605c61.js.map",
+    "787.00ef52c5.chunk.js.map": "/kchen283.github.io/SpotifyAPIProject/static/js/787.00ef52c5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a34d7f2f.css",
-    "static/js/main.044ecad8.js"
+    "static/js/main.9d605c61.js"
   ]
 }
