@@ -16,12 +16,14 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify Node.js version if needed
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm install  # Installs dependencies
 
       - name: Build project
-        run: npm run build
+        run: npm run build  # Builds the project
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
@@ -36,6 +38,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3  # Ensures CNAME file is present
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
@@ -47,4 +52,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: keri-chen.com  
+          cname: keri-chen.com  # Specify your custom domain here
