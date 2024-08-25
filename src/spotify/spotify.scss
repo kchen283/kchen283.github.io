@@ -1,0 +1,73 @@
+.Spotify {
+  // Styling for the search container
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+
+    .custom-input-group {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+      
+
+      .custom-form-control {
+        padding: 10px;
+        font-size: 22px;
+        border-radius: 12px;
+        width: 75%;
+        border: none;
+      }
+
+      .custom-button {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        background-color: #F786AA;
+        &:hover {
+          background-color: #a0526b;
+      }
+      }
+  }
+
+  // Styling for the albums container
+  .albums-container {
+    margin: 20px;
+
+    .custom-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px; // Adjust spacing between columns
+
+      .custom-col {
+        flex: 1 1 calc(25% - 20px); // 25% width for 4 columns with gap adjustment
+        max-width: calc(25% - 20px); // Adjust for gap to ensure proper alignment
+        margin-bottom: 20px; // Space between rows
+
+        .custom-card {
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          overflow: hidden;
+          height: 100%; // Ensure card takes full height of column
+
+          .custom-card-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; // Ensure image covers the area without distortion
+          }
+
+          .custom-card-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}
