@@ -23,7 +23,7 @@ const App = () => {
   return ( 
     <Router>
         <Routes>
-        <Route path="kchen283.github.io/" element= { 
+        <Route path="https://keri-chen.com/" element= { 
             <div>
               <section id = "Home">
                 <Navbar/>
