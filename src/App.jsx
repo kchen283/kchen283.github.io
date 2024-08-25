@@ -8,7 +8,7 @@ import Calculator from './calculator/Calculator';
 import Doordash from "./doordash/Doordash";
 import Spotify from "./spotify/Spotify";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 const scrollToTop = () => {
