@@ -8,8 +8,8 @@ const Spotify = () => {
   const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
 
-  const CLIENT_ID = "7311656353e9483bbc471f86c5c721f6";
-  const CLIENT_SECRET = "a2fa4ef393b440209b50f8242402a34c";
+  const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID;
+  const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
 
   useEffect(() => {
     // API Access Token
