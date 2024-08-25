@@ -23,7 +23,7 @@ const App = () => {
   return ( 
     <Router>
         <Routes>
-        <Route path="https://keri-chen.com/" element= { 
+        <Route path="/" element= { 
             <div>
               <section id = "Home">
                 <Navbar/>
