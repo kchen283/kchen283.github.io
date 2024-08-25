@@ -7,21 +7,21 @@ const items = [
     {
         id:1,
         title: "Calculator App",
-        img: "src/components/photos/iPhone 8 Plus - 1 — All Hands — Left hand.png",
+        img: "photos/iPhone 8 Plus - 1 — All Hands — Left hand.png",
         desc: "Building a web calculator!",
         navigate: "/Calculator App"
     },
     {
         id:2,
         title: "DoorDash Case Study",
-        img: "src/components/photos/prototype.png",
+        img: "photos/prototype.png",
         desc: "Doordash — the food delivery app with the majority US market share at 57% has around 20 million monthly users (including international markets: Australia, Canada, and Japan). With this many users, it becomes hard to cater to everyone, so we wanted to find better ways to cater towards people with dietary restrictions/lifestyles.",
         navigate:"Doordash Case Study"
     },
     {
         id:3,
         title: "Spotify API",
-        img: "src/components/photos/spotifylogo.png",
+        img: "photos/spotifylogo.png",
         desc: "Testing the Spotify API",
         navigate:"/Spotify API"
     }

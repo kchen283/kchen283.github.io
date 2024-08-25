@@ -6,7 +6,7 @@ const Doordash = () => {
         <div className="doordash">
             <Navbar/>
             <div className="imageContainer"> 
-                <img src="../images/doordash/Frame 27 (2).png" style={{ width: '75%', justifyContent: 'center', paddingLeft: '10vw' }} alt="Introduction" />
+                <img src="images/doordash/Frame 27 (2).png" style={{ width: '75%', justifyContent: 'center', paddingLeft: '10vw' }} alt="Introduction" />
             </div>
             <div className="container">
                 <h1>Introduction</h1>

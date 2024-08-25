@@ -1,7 +1,6 @@
 html {
-    scroll-snap-type: y mandatory; /* Enable snap for vertical scrolling */
+    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-
 }
 
 * { 
@@ -14,6 +13,8 @@ html {
 body{ 
     background-color: #0d2e3f;
     color: lightgray;
+    scroll-snap-type: y mandatory;
+
 }
 
 a {

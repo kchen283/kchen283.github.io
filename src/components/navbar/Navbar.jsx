@@ -31,7 +31,7 @@ const Navbar = () => {
                     <a href="https://www.linkedin.com/in/kerichen"         
                         target="_blank" 
                         rel="noopener noreferrer"> 
-                        <img src="src/components/photos/linkedinicon.png" alt=""/>
+                        <img src="photos/linkedinicon.png" alt=""/>
                     </a>
                     <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                     <i class="fa-solid fa-house" style={{ color: 'pink' }}></i>                   

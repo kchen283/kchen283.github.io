@@ -46,7 +46,7 @@ const App = () => {
           }/>
           <Route path="/Calculator App" element={<Calculator/>} />
           <Route path="/Doordash Case Study" element={<Doordash/>}/>
-          <Route path="Spotify API" element={<Spotify/>} />
+          <Route path="/Spotify API" element={<Spotify/>} />
         </Routes>
     </Router>
   )
