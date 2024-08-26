@@ -22,6 +22,7 @@ const Spotify = () => {
       },
       body: 'grant_type=client_credentials'
     };
+    console.log(CLIENT_ID);
     
     fetch('https://accounts.spotify.com/api/token',authParameters)
       .then(result => result.json())
