@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Col, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
+import { Col, InputGroup, FormControl, Button, Row, Card } from 'react-bootstrap';
 import './spotify.scss';
 import Navbar from '../components/navbar/Navbar';
 
@@ -10,24 +10,46 @@ const Spotify = () => {
 
   const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID;
   const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
+  const code = new URLSearchParams(window.location.search).get('code');
 
   useEffect(() => {
-    // API Access Token
-    var authParameters = {
-      url: `https://accounts.spotify.com/api/token`,
-      method: 'POST',
-      headers: {
-          'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET),
-          'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials'
-    };
-    console.log(CLIENT_ID);
-    
-    fetch('https://accounts.spotify.com/api/token',authParameters)
-      .then(result => result.json())
+    if (code) {
+      // Fetch the access token using the authorization code
+      fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
+        },
+        body: new URLSearchParams({
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: 'http://localhost:5173/#/Spotify%20API'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        setAccessToken(data.access_token);
+
+        // Remove the code from the URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      })
+      .catch(error => console.error("Error fetching access token:", error));
+    } else {
+      // Fetch client credentials token (as a fallback if no code is provided)
+      fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
+        },
+        body: 'grant_type=client_credentials'
+      })
+      .then(response => response.json())
       .then(data => setAccessToken(data.access_token))
-  }, [])
+      .catch(error => console.error("Error fetching client credentials token:", error));
+    }
+  }, [code]);
 
   const search = async () => {
     console.log("Search for " + searchInput);
@@ -59,7 +81,7 @@ const Spotify = () => {
 
   return (
     <div className="Spotify">
-      <Navbar/>
+      <Navbar />
       <div className="search-container">
         <InputGroup size="lg" className="custom-input-group">
           <FormControl
@@ -96,7 +118,5 @@ const Spotify = () => {
     </div>
   );
 };
-
-
 
 export default Spotify;
