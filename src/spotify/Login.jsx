@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.scss';
+import './login.scss';
 
 const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=7311656353e9483bbc471f86c5c721f6&response_type=code&redirect_uri=https://keri-chen.com&scope=user-top-read%20user-read-recently-played";
 
