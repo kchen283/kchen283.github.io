@@ -3,7 +3,7 @@ import { URLSearchParams } from 'url';
 
 const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = 'https://spotifycolorring-kchen283-kchen283s-projects.vercel.app/api/callback';
+const redirect_uri = 'https://spotifycolorring-kchen283s-projects.vercel.app/api/callback';
 
 export default async function handler(req, res) {
     const { code } = req.query;
