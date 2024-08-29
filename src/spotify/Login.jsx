@@ -7,7 +7,7 @@ const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=7311656353e94
 const Login = () => {
   return (
     <div className="login-container">
-      <a className="login-button" href={AUTH_URL} target="_blank" rel="noopener noreferrer">Login with Spotify</a>
+      <a className="login-button" href={AUTH_URL} rel="noopener noreferrer">Login with Spotify</a>
     </div>
   );
 };
