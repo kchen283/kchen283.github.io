@@ -5,53 +5,26 @@ import Navbar from '../components/navbar/Navbar';
 
 const Spotify = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
-
-  const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID;
-  const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
-  const code = new URLSearchParams(window.location.search).get('code');
+  const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
-    if (code) {
-      // Fetch the access token using the authorization code
-      fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
-        },
-        body: new URLSearchParams({
-          grant_type: 'authorization_code',
-          code: code,
-          redirect_uri: 'http://localhost:5173/#/Spotify%20API'
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        setAccessToken(data.access_token);
-
-        // Remove the code from the URL
-        window.history.replaceState({}, document.title, window.location.pathname);
-      })
-      .catch(error => console.error("Error fetching access token:", error));
+    // Extract access token from URL hash
+    const urlParams = new URLSearchParams(window.location.hash.replace('#', '').replace('?', '&'));
+    const token = urlParams.get('access_token');
+    if (token) {
+      setAccessToken(token);
     } else {
-      // Fetch client credentials token (as a fallback if no code is provided)
-      fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET)
-        },
-        body: 'grant_type=client_credentials'
-      })
-      .then(response => response.json())
-      .then(data => setAccessToken(data.access_token))
-      .catch(error => console.error("Error fetching client credentials token:", error));
+      console.error("No access token found in URL");
     }
-  }, [code]);
+  }, []);
 
   const search = async () => {
+    if (!accessToken) {
+      console.error("No access token found.");
+      return;
+    }
+
     console.log("Search for " + searchInput);
 
     const searchParam = {
@@ -62,20 +35,21 @@ const Spotify = () => {
       },
     };
 
-    const artistID = await fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=artist`, searchParam)
-      .then(response => response.json())
-      .then(data => data.artists.items[0]?.id);
+    try {
+      const artistResponse = await fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=artist`, searchParam);
+      const artistData = await artistResponse.json();
+      const artistID = artistData.artists.items[0]?.id;
 
-    console.log("Artist ID is " + artistID);
+      console.log("Artist ID is " + artistID);
 
-    if (artistID) {
-      const returnedAlbums = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&market=US&limit=50`, searchParam)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          setAlbums(data.items);
-        })
-        .catch(error => console.error("Error fetching albums:", error));
+      if (artistID) {
+        const albumsResponse = await fetch(`https://api.spotify.com/v1/artists/${artistID}/albums?include_groups=album&market=US&limit=50`, searchParam);
+        const albumsData = await albumsResponse.json();
+        console.log(albumsData);
+        setAlbums(albumsData.items);
+      }
+    } catch (error) {
+      console.error("Error fetching albums:", error);
     }
   };
 
@@ -106,7 +80,7 @@ const Spotify = () => {
           {albums.map((album, i) => (
             <Col key={i} className="custom-col">
               <Card className="custom-card">
-                <Card.Img src={album.images[0].url} className="custom-card-img" />
+                <Card.Img src={album.images[0]?.url} className="custom-card-img" alt={album.name} />
                 <Card.Body>
                   <Card.Title className="custom-card-title">{album.name}</Card.Title>
                 </Card.Body>

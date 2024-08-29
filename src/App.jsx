@@ -23,24 +23,25 @@ const App = () => {
   };
 
   // Function to remove code from URL
-  const cleanUrl = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('code');
-    window.history.replaceState({}, '', url);
-  };
+ // const cleanUrl = () => {
+  //  const url = new URL(window.location.href);
+   // url.searchParams.delete('code');
+    //window.history.replaceState({}, '', url);
+  //};
 
   // Effect to handle URL cleanup if code is present
-  useEffect(() => {
-    if (code) {
-      cleanUrl();
-    }
-  }, [code]);
+ // useEffect(() => {
+  //  if (code) {
+   //   cleanUrl();
+   // }
+  // }, [code]);
 
+  
   return (
     <Router>
       <Routes>
         {/* Redirect to Spotify if code exists, otherwise show home page */}
-        <Route path="/" element={code ? <Navigate to="/Spotify API" /> : (
+        <Route path="/"  element={code ? <Navigate to="/Spotify API" /> :(
           <div>
             <section id="Home">
               <Navbar />
