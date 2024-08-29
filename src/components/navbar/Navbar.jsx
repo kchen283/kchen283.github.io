@@ -24,7 +24,7 @@ const Navbar = () => {
             window.history.replaceState({}, '', url.toString());
     
             // Navigate to the specified URL
-            window.location.href = 'http://localhost:5173';
+            window.location.href = 'https://keri-chen.com';
         } catch (error) {
             console.error("Error handling home click:", error);
         }
