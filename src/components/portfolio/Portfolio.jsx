@@ -20,9 +20,9 @@ const items = [
     },
     {
         id: 3,
-        title: "Spotify API",
+        title: "Spotify Color",
         img: "photos/spotifylogo.png",
-        desc: "Testing the Spotify API",
+        desc: "Check what your Spotify Color is based on your recent songs and find your top artists",
         navigate: "/Spotify Login" // Default to login
     }
 ];

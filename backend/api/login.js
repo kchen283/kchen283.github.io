@@ -20,7 +20,7 @@ export default function handler(req, res) {
   
     // Construct the Spotify authorization URL
     const state = generateRandomString(16);
-    const scope = 'user-read-private user-read-email';
+    const scope = 'user-read-private user-read-email user-top-read user-read-recently-played';
     const spotifyAuthURL = `https://accounts.spotify.com/authorize?` +
       new URLSearchParams({
         response_type: 'code',
