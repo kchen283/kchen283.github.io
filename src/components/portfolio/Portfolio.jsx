@@ -22,7 +22,7 @@ const items = [
         id: 3,
         title: "Spotify Color",
         img: "photos/spotifylogo.png",
-        desc: "Check what your Spotify Color is based on your recent songs and find your top artists",
+        desc: "Check what your Spotify Color is based on your recent songs and find your top artists based on hashing values.",
         navigate: "/Spotify Login" // Default to login
     }
 ];

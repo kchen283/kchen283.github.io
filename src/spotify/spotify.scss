@@ -95,6 +95,7 @@
       flex-wrap: wrap;
       gap: 20px; // Adjust spacing between columns
       padding-top: 15px;
+      
 
       .custom-col {
         flex: 1 1 calc(10% - 20px); // 25% width for 4 columns with gap adjustment
@@ -106,6 +107,7 @@
           border-radius: 8px;
           overflow: hidden;
           height: 100%; // Ensure card takes full height of column
+          flex: column;
 
           .custom-card-img {
             width: 100%;
@@ -118,6 +120,11 @@
             font-weight: bold;
             text-align: center;
             padding: 10px;
+            color: black;
+            flex-grow: 1; /* Allow the title to take up available space */
+            display: flex;
+            align-items: center; /* Vertically center the title */
+            justify-content: center; /* Horizontally center the title */
           }
         }
       }

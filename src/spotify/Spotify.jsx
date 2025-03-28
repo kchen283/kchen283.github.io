@@ -4,77 +4,6 @@ import './spotify.scss';
 import Navbar from '../components/navbar/Navbar';
 
 
-// Function to fetch audio features
-const fetchAudioFeatures = async (trackIds, token) => {
-  const endpoint = `https://api.spotify.com/v1/audio-features?ids=${trackIds.join(',')}`;
-  const searchParam = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  };
-
-  try {
-    const response = await fetch(endpoint, searchParam);
-    if (response.ok) {
-      const data = await response.json();
-      return data.audio_features;
-    } else {
-      console.error("Error fetching audio features:", response.statusText);
-      return [];
-    }
-  } catch (error) {
-    console.error("Error fetching audio features:", error);
-    return [];
-  }
-};
-
-// Function to adjust color based on audio features
-const adjustColorBasedOnAudioFeatures = (features) => {
-  const {
-    acousticness = 0,
-    danceability = 0,
-    duration_ms = 0,
-    energy = 0,
-    instrumentalness = 0,
-    liveness = 0,
-    loudness = 0,
-    speechiness = 0,
-    tempo = 0
-  } = features;
-
-  const hue = Math.max(0, Math.min(360, (acousticness * 240) + (tempo * 0.6) + (speechiness * 60))); // Adjust hue based on features
-  const saturation = Math.min(100, danceability * 100);
-  const lightness = 50 + (instrumentalness * 20) - (loudness * 10); // Adjust lightness based on features
-
-  // Convert HSL to HEX for color
-  const hslToHex = (h, s, l) => {
-    s /= 100;
-    l /= 100;
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    const m = l - c / 2;
-    let r = 0, g = 0, b = 0;
-
-    if (0 <= h && h < 60) [r, g, b] = [c, x, 0];
-    else if (60 <= h && h < 120) [r, g, b] = [x, c, 0];
-    else if (120 <= h && h < 180) [r, g, b] = [0, c, x];
-    else if (180 <= h && h < 240) [r, g, b] = [0, x, c];
-    else if (240 <= h && h < 300) [r, g, b] = [x, 0, c];
-    else if (300 <= h && h < 360) [r, g, b] = [c, 0, x];
-
-    const rgbToHex = (r, g, b) => {
-      return `#${Math.round((r + m) * 255).toString(16).padStart(2, '0')}${Math.round((g + m) * 255).toString(16).padStart(2, '0')}${Math.round((b + m) * 255).toString(16).padStart(2, '0')}`;
-    };
-
-    return rgbToHex(r, g, b);
-  };
-
-  return hslToHex(hue, saturation * 100, lightness * 100);
-};
-
-
 const Spotify = () => {
   const [searchInput, setSearchInput] = useState("");
   const [albums, setAlbums] = useState([]);
@@ -83,20 +12,25 @@ const Spotify = () => {
   const [topTracks, setTopTracks] = useState([]);
   const [recentlyPlayedTracks, setRecentlyPlayedTracks] = useState([]);
   const [trackAudioFeatures, setTrackAudioFeatures] = useState([]);
-
+  const[audioToken, setAudioToken] = useState("");
+ 
 
   useEffect(() => {
+    // Fetch the audio token if it's not already set
     const urlParams = new URLSearchParams(window.location.hash.replace('#', '').replace('?', '&'));
     const token = urlParams.get('access_token');
+
     if (token) {
       setAccessToken(token);
-      fetchTopItems(token);
-      fetchRecentlyPlayedTracks(token);
+      fetchTopItems(token); // Fetch your top items with the main token
+      fetchRecentlyPlayedTracks(token); 
     } else {
       console.error("No access token found in URL");
-      redirectToLogin();
+      redirectToLogin(); // Redirect to login if no token
     }
-  }, []);
+  }, [audioToken]); // The effect will run when audioToken changes
+
+
 
   const redirectToLogin = () => {
     window.location.href = '/#/Spotify%20login'; // Adjust this to your login route
@@ -137,6 +71,41 @@ const Spotify = () => {
       console.error("Error fetching top items:", error);
     }
   };
+/* deprecated
+  function getColorFromAudioFeatures(audioFeatures) {
+    const { danceability, energy, acousticness, instrumentalness, loudness, tempo, valence } = audioFeatures;
+  
+    // Start with a base color (light grey)
+    let r = 200, g = 200, b = 200;
+  
+    // Adjust color based on audio features
+    r += energy * 255;  // More energy, more red
+    g += acousticness * 255;  // More acoustic, more green
+    b += danceability * 255;  // More danceability, more blue
+  
+    // Adjust color based on instrumentalness (more green for instrumental)
+    g += instrumentalness * 255;
+  
+    // Adjust based on loudness (more loud, more dark)
+    r -= loudness * 50;  // Reduce red for louder tracks
+    g -= loudness * 50;  // Reduce green for louder tracks
+    b -= loudness * 50;  // Reduce blue for louder tracks
+  
+    // Adjust based on tempo (faster tempo, more red)
+    r += tempo / 100 * 255;  // Scale tempo to adjust red
+  
+    // Adjust based on valence (more positive mood, more yellowish)
+    g += valence * 255;  // Increase green for more positive mood
+  
+    // Ensure color values are within the valid range (0-255)
+    r = Math.min(Math.max(r, 0), 255);
+    g = Math.min(Math.max(g, 0), 255);
+    b = Math.min(Math.max(b, 0), 255);
+  
+    // Convert to RGB color format
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  */
 
   const fetchRecentlyPlayedTracks = async (token) => {
     const searchParam = {
@@ -147,16 +116,21 @@ const Spotify = () => {
       },
     };
 
+
     try {
       const recentlyPlayedResponse = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=10', searchParam);
       if (!await checkTokenValidity(recentlyPlayedResponse)) return;
 
       const recentlyPlayedData = await recentlyPlayedResponse.json();
-      const tracksWithGenres = await Promise.all(recentlyPlayedData.items.map(async (item) => {
+      const tracksWithGenresAndColors = await Promise.all(recentlyPlayedData.items.map(async (item) => {
+        const trackId = item.track.id;  // Track ID is here
         const artistGenres = await fetchArtistGenres(item.track.artists[0].id, token);
-        return { ...item, artistGenres };
+        
+        // Return track with genre and color information
+        return { ...item, trackId, artistGenres };
       }));
-      setRecentlyPlayedTracks(tracksWithGenres);
+
+    setRecentlyPlayedTracks(tracksWithGenresAndColors);
     } catch (error) {
       console.error("Error fetching recently played tracks:", error);
     }
@@ -181,15 +155,7 @@ const Spotify = () => {
     }
   };
 
-  const getColorForGenres = (genres) => {
-    for (let genre of genres) {
-      const normalizedGenre = genre.replace(/ /g, '_').toLowerCase();
-      if (genreColorsMap[normalizedGenre]) {
-        return genreColorsMap[normalizedGenre];
-      }
-    }
-    return genreColorsMap.default;
-  };
+
 
   const search = async () => {
     if (!accessToken) {
@@ -229,66 +195,43 @@ const Spotify = () => {
     }
   };
 
-  const generateColorFromGenre = (genre) => {
+  const hashToColor = (str) => {
     let hash = 0;
-    for (let i = 0; i < genre.length; i++) {
-      hash = genre.charCodeAt(i) + ((hash << 5) - hash);
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const hue = hash % 360; // Ensure hue is within [0, 360)
-    const saturation = 50; // Fixed saturation
-    const lightness = 50; // Fixed lightness
-    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    let color = "#";
+    for (let i = 0; i < 3; i++) {
+      color += ("00" + ((hash >> (i * 8)) & 0xff).toString(16)).slice(-2);
+    }
+    return color;
   };
 
   const blendColors = (colors) => {
-    let totalR = 500, totalG = 500, totalB = 500;
+    if (colors.length === 0) return '#FFFFFF';
 
+    let r = 0, g = 0, b = 0;
     colors.forEach(color => {
-      const { r, g, b } = hexToRgb(color);
-      totalR += r;
-      totalG += g;
-      totalB += b;
+      let hex = color.replace('#', '');
+      r += parseInt(hex.substring(0, 2), 16);
+      g += parseInt(hex.substring(2, 4), 16);
+      b += parseInt(hex.substring(4, 6), 16);
     });
 
-    const avgR = Math.round(totalR / colors.length);
-    const avgG = Math.round(totalG / colors.length);
-    const avgB = Math.round(totalB / colors.length);
+    r = Math.floor(r / colors.length);
+    g = Math.floor(g / colors.length);
+    b = Math.floor(b / colors.length);
 
-    return rgbToHex(avgR, avgG, avgB);
+    return `rgb(${r}, ${g}, ${b})`;
   };
 
-  const getGenreColor = (genres) => {
-    if (genres.length === 0) {
-      return '#D3D3D3'; // Default color if no genres are found
-    }
+   // Compute the average color from track names and artist names
+   const generateAverageColor = () => {
+    const trackColors = recentlyPlayedTracks.map(track => hashToColor(track.track.name));
+    const artistColors = topArtists.map(artist => hashToColor(artist.name));
+    const allColors = [...trackColors, ...artistColors];
 
-    const genreColorList = genres.map(genre => generateColorFromGenre(genre));
-    if (genres.length === 1) {
-      return genreColorList[0];
-    }
-
-    return blendColors(genreColorList);
-  };
-
-  const hexToRgb = (hex) => {
-    let bigint = parseInt(hex.slice(1), 16);
-    let r = (bigint >> 16) & 255;
-    let g = (bigint >> 8) & 255;
-    let b = bigint & 255;
-    return { r, g, b };
-  };
-
-  const rgbToHex = (r, g, b) => {
-    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
-  };
-
-  const generateAverageColor = () => {
-    const colors = recentlyPlayedTracks.map(track => getGenreColor(track.artistGenres));
-    if (colors.length > 0) {
-      console.log(colors);
-      return blendColors(colors);
-    }
-    return '#FFFFFF'; // Default color if no tracks are available
+    return blendColors(allColors);
   };
 
   return (
@@ -316,8 +259,7 @@ const Spotify = () => {
 
       <div className="circle-container">
         <div
-          className="genre-circle"
-          style={{ backgroundColor: generateAverageColor() }}
+          className="genre-circle" style={{ backgroundColor: generateAverageColor() }}
         />
       </div>
 
@@ -328,11 +270,11 @@ const Spotify = () => {
                 <Col key={i} xs={6} md={4} lg={2} className="custom-col">
                   <Card 
                     className="custom-card"
-                    style={{ backgroundColor: getGenreColor(artist.genres) }} // Change background color based on artist genres
+                    style={{ backgroundColor: hashToColor(artist.name) }}
                   >
                     <Card.Img src={artist.images[0]?.url} className="custom-card-img" alt={artist.name} />
                     <Card.Body>
-                      <Card.Title className="custom-card-title">{artist.name}</Card.Title>
+                        <Card.Title className="custom-card-title" style={{ color: "black" }}>{artist.name}</Card.Title>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -346,12 +288,11 @@ const Spotify = () => {
         {recentlyPlayedTracks.map((track, i) => {
           const audioFeatures = trackAudioFeatures.find(feature => feature.id === track.track.id) || {};
           return (
-            <li
+            <p
               key={i}
-              className="recently-played-item"
-              style={{ backgroundColor: adjustColorBasedOnAudioFeatures(audioFeatures) }}>
+              className="recently-played-item">
               <strong>{track.track.name}</strong> - {track.track.artists.map(artist => artist.name).join(', ')}
-            </li>
+            </p>
           );
         })}
       </ul>
