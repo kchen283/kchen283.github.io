@@ -6,25 +6,32 @@ import "./portfolio.scss";
 const items = [
     {
         id: 1,
-        title: "Calculator App",
-        img: "photos/iPhone 8 Plus - 1 — All Hands — Left hand.png",
-        desc: "Building a web calculator!",
-        navigate: "/Calculator App"
-    },
-    {
-        id: 2,
         title: "DoorDash Case Study",
         img: "photos/prototype.png",
         desc: "Doordash — the food delivery app with the majority US market share at 57% has around 20 million monthly users...",
         navigate: "/Doordash Case Study"
     },
     {
+        id: 2,
+        title: "Realtor Website",
+        img: "photos/realestate.png",
+        desc: "Explore a real estate website with past sales and reviews synced with a MLS brokerage, and neighborhood insights. The site is build using Next.js, Tailwind CSS, and javascript for the backend, and is hosted on Hostinger on a VPS that is customized.",
+        navigate: "https://kchenrealtor.com" // External site
+    },
+     {
         id: 3,
         title: "Spotify Color",
         img: "photos/spotifylogo.png",
         desc: "Check what your Spotify Color is based on your recent songs and find your top artists based on hashing values.",
         navigate: "/Spotify Login" // Default to login
-    }
+    },
+    {
+        id: 4,
+        title: "Calculator App",
+        img: "photos/iPhone 8 Plus - 1 — All Hands — Left hand.png",
+        desc: "Building a web calculator!",
+        navigate: "/Calculator App"
+    },
 ];
 
 const Portfolio = () => {
@@ -42,9 +49,15 @@ const Portfolio = () => {
     const handleNavigate = (itemNavigate) => {
         if (itemNavigate === "/Spotify Login" && code) {
             navigate("/Spotify API", { state: { code } }); // Navigate to Spotify App with code
-        } else {
-            navigate(itemNavigate); // Navigate to the specified page
+        }   // Handle external links (like your Realtor website)
+       
+        else if (itemNavigate.startsWith("http")) {
+            window.location.href = itemNavigate; // or .replace() to prevent back navigation
+            return;
         }
+
+        // Default internal navigation
+        navigate(itemNavigate);
     };
 
     return (
@@ -71,7 +84,7 @@ const Single = ({ item, handleNavigate }) => {
 
     return (
         <section ref={ref}>
-            <div className="container">
+            <div className="container">  
                 <div className="wrapper">
                     <div className="imageContainer">
                         <img src={item.img} alt="" />
