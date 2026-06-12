@@ -1,51 +1,91 @@
-@import "../../app.scss";
-
 .about {
-    margin-top: 50px;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 100px 10%;
+
+  .aboutLeft {
+    flex: 1;
     display: flex;
-    color: #FFFFFF;
-    @include mobile {
-        flex-direction: column;
+    justify-content: center;
+  }
+
+  .profileImage {
+    width: 350px;
+    height: 350px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .aboutRight {
+    flex: 1.4;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      line-height: 1.1;
     }
 
-    .textContainer {
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        margin-left: 10%;
-        flex: 2;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #bdbdbd;
+      margin-bottom: 0px;
+    }
+  }
 
-        h1 {
-            font-size: 15vh;
-            @include mobile {
-                padding-top: 25px;
-                font-size: 5vh;
-            }
-        }
-        p {
-            font-size: 2.5vh;
-        }
+  .sectionTag {
+    color: #f59e0b;
+    letter-spacing: 3px;
+    font-weight: 600;
+  }
+
+  .currentlyCard {
+    margin-top: 15px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+
+    h3 {
+      margin-bottom: 10px;
     }
 
-    .iconContainer {
-        margin-top: 100px;
-        flex: 1;
-        height: 650x;
-        width: 650px;
-        stroke:#F786AA;
-        text-align: right;
-
-        @include mobile {
-            margin-top: 10px;
-            text-align: left;
-            height: 200px;
-            width: 200px;
-            stroke-width: 0.5px;
-        }
+    .currentItem {
+      margin-bottom: 5px;
     }
-    
+  }
+
+  .statsGrid {
+    margin-top: 2px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .statCard {
+    padding: 24px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    cursor: pointer;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      color: #f59e0b;
+    }
+
+    span {
+      color: #bdbdbd;
+    }
+  }
 }
-
