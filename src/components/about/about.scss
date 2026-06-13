@@ -51,7 +51,7 @@
   .currentlyCard {
     margin-top: 15px;
     padding: 24px;
-    border: 1px solid rgba(255,255,255,.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     backdrop-filter: blur(12px);
 
@@ -74,8 +74,8 @@
   .statCard {
     padding: 24px;
     border-radius: 20px;
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
 
     h2 {
@@ -86,6 +86,69 @@
 
     span {
       color: #bdbdbd;
+    }
+  }
+
+  // Tablet
+  @media (max-width: 1024px) {
+    gap: 50px;
+    padding: 80px 6%;
+
+    .profileImage {
+      width: 280px;
+      height: 280px;
+    }
+
+    .aboutRight h1 {
+      font-size: 2rem;
+    }
+  }
+
+  // Mobile
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 80px 6% 60px;
+    min-height: unset;
+
+    .aboutLeft {
+      width: 100%;
+    }
+
+    .profileImage {
+      width: 220px;
+      height: 220px;
+      border-radius: 20px;
+    }
+
+    .aboutRight {
+      width: 100%;
+
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    .currentlyCard {
+      padding: 18px;
+    }
+
+    .statsGrid {
+      gap: 12px;
+    }
+
+    .statCard {
+      padding: 18px;
+
+      h2 {
+        font-size: 2rem;
+      }
     }
   }
 }

@@ -33,7 +33,7 @@ const items = [
     img: "/photos/Group 1.png",
     desc:
       "A redesign focused on improving food discovery and reducing checkout friction.",
-    navigate: "/Doordash Case Study",
+    navigate: "/doordash-case-study",
   },
 ];
 

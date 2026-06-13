@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./app.scss";
 
 import Hero from "./components/hero/Hero";
@@ -13,29 +13,27 @@ import Login from "./spotify/Login";
 import UnlockEarth from "./unlock-earth/unlock-earth";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 const Home = () => {
-  const scrollToTop = useCallback(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
   return (
     <div className="app">
       <Navbar />
-
       <main>
         <section id="home" className="section hero-section">
           <Hero />
         </section>
-
         <section id="about" className="section about-section">
           <About />
         </section>
-
         <section id="portfolio" className="section portfolio-section">
           <Portfolio />
         </section>
@@ -47,6 +45,7 @@ const Home = () => {
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/unlock-earth" element={<UnlockEarth />} />
