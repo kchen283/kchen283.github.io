@@ -1,5 +1,5 @@
 .about {
-  min-height: 100vh;
+  min-height: 200vh;
   display: flex;
   align-items: center;
   gap: 80px;
@@ -110,7 +110,7 @@
     align-items: center;
     gap: 40px;
     padding: 80px 6% 60px;
-    min-height: unset;
+    min-height: 100vh;
 
     .aboutLeft {
       width: 100%;

@@ -1,18 +1,26 @@
-.portfolio section {
-  scroll-snap-align: none;
-  height: auto;
+
+.portfolio {
+  position: relative;  // establishes stacking context
+  z-index: 0;
+  overflow: hidden;    // prevents bleed into adjacent sections
+}
+
+.progress {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  // if it's currently fixed, that would cause overlap
 }
 
 /* =========================
-   HEADER (UPGRADED)
+   HEADER
 ========================= */
 .portfolioHeader {
-  padding: 0 5%;   /* SAME as About section */
+  padding: 0 5%;
   margin-top: 60px;
   text-align: left;
 }
 
-/* subtle background glow behind title */
 .portfolioHeader::before {
   content: "";
   position: absolute;
@@ -34,32 +42,18 @@
   font-weight: 800;
   letter-spacing: -2px;
   line-height: 1.05;
-
-  background: linear-gradient(
-    90deg,
-    #ffffff,
-    #f59e0b,
-    #ffffff
-  );
+  background: linear-gradient(90deg, #ffffff, #f59e0b, #ffffff);
   background-size: 200% auto;
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   animation: shine 6s linear infinite;
-
   position: relative;
   z-index: 1;
 }
 
-/* animated gradient sweep */
 @keyframes shine {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .portfolioSubtitle {
@@ -68,7 +62,6 @@
   opacity: 0.7;
   max-width: 620px;
   line-height: 1.6;
-
   position: relative;
   z-index: 1;
 }
@@ -83,18 +76,13 @@
   grid-template-columns: 1.2fr 1fr;
   gap: 50px;
   align-items: center;
-
   padding: 36px;
   min-height: 520px;
-
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
-
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(18px);
-
   transition: transform 0.3s ease, border-color 0.3s ease;
-
   will-change: transform;
 
   &:hover {
@@ -118,9 +106,7 @@
     transition: transform 0.5s ease;
   }
 
-  &:hover img {
-    transform: scale(1.06);
-  }
+  &:hover img { transform: scale(1.06); }
 }
 
 /* =========================
@@ -175,7 +161,6 @@
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-
   transition: transform 0.25s ease, opacity 0.25s ease;
 
   &:hover {
@@ -202,25 +187,8 @@
 }
 
 /* =========================
-   RESPONSIVE
+   SKILLS
 ========================= */
-@media (max-width: 900px) {
-  .projectCard {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 28px;
-  }
-
-  .projectContent h2 {
-    font-size: 2rem;
-  }
-
-  .portfolioTitle {
-    font-size: 2.4rem;
-  }
-
-}
-
 .portfolioHeader,
 .skillsSection {
   max-width: 1200px;
@@ -242,32 +210,136 @@
   letter-spacing: -0.5px;
 }
 
-/* grid of chips */
 .skillsGrid {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-/* skill pill */
 .skillChip {
   padding: 10px 16px;
   border-radius: 999px;
-
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   font-size: 0.6rem;
   color: #e5e5e5;
-
   transition: all 0.25s ease;
-
   cursor: default;
+
+  &:hover {
+    transform: translateY(-3px);
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.3);
+  }
 }
 
-.skillChip:hover {
-  transform: translateY(-3px);
-  background: rgba(245, 158, 11, 0.12);
-  border-color: rgba(245, 158, 11, 0.3);
+/* =========================
+   TABLET (≤900px)
+========================= */
+@media (max-width: 900px) {
+  .portfolioHeader,
+  .skillsSection {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .portfolioTitle {
+    font-size: 2.4rem;
+    letter-spacing: -1px;
+  }
+
+  .portfolioSubtitle {
+    font-size: 1rem;
+  }
+
+  .projectCard {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+    margin: 50px auto;
+    min-height: unset;
+  }
+
+  .projectContent h2 {
+    font-size: 2rem;
+  }
 }
 
+/* =========================
+   MOBILE (≤600px)
+========================= */
+@media (max-width: 600px) {
+  .portfolioHeader {
+    margin-top: 40px;
+  }
+
+  .portfolioHeader,
+  .skillsSection {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .portfolioTitle {
+    font-size: 2rem;
+    letter-spacing: -0.5px;
+  }
+
+  .portfolioSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .projectCard {
+    margin: 32px auto;
+    padding: 20px;
+    border-radius: 18px;
+    gap: 20px;
+  }
+
+  .projectImage {
+    border-radius: 12px;
+    // cap height so tall images don't dominate
+    max-height: 220px;
+
+    img { object-position: top; }
+  }
+
+  .projectContent h2 {
+    font-size: 1.6rem;
+    margin: 8px 0 10px;
+  }
+
+  .projectContent p {
+    font-size: 0.95rem;
+  }
+
+  .projectCategory {
+    font-size: 0.7rem;
+  }
+
+  .techStack {
+    gap: 6px;
+    margin: 14px 0 20px;
+
+    span { font-size: 0.75rem; padding: 6px 10px; }
+  }
+
+  .projectContent button {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+  }
+
+  .skillsSection {
+    margin-top: 12px;
+  }
+
+  .skillsSection h3 {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+
+  .skillChip {
+    padding: 8px 12px;
+    font-size: 0.65rem;
+  }
+}
