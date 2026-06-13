@@ -10,6 +10,7 @@ import Calculator from "./calculator/Calculator";
 import Doordash from "./doordash/Doordash";
 import Spotify from "./spotify/Spotify";
 import Login from "./spotify/Login";
+import UnlockEarth from "./unlock-earth/unlock-earth";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
@@ -48,11 +49,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-
+        <Route path="/unlock-earth" element={<UnlockEarth />} />
         <Route path="/doordash-case-study" element={<Doordash />} />
         <Route path="/spotify-login" element={<Login />} />
         <Route path="/spotify-api" element={<Spotify />} />
-        <Route path="/calculator-app" element={<Calculator />} />
       </Routes>
     </Router>
   );

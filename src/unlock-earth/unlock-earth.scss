@@ -1,0 +1,336 @@
+/* =========================
+   UNLOCK EARTH PALETTE
+========================= */
+
+$BG: #E7DDCF;
+$CARD: #F4ECE2;
+$TEXT: #2C2A27;
+$MUTED: #6E665C;
+$BORDER: #D8CBBE;
+
+$ACCENT: #2F6F5E;
+$ACCENT_2: #B08968;
+
+/* =========================
+   BASE LAYOUT
+========================= */
+
+.coming-soon {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: $TEXT;
+
+  background:
+    radial-gradient(circle at top left, rgba(47, 111, 94, 0.12), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(176, 137, 104, 0.18), transparent 45%),
+    $BG;
+
+  /* GRID */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(44, 42, 39, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(44, 42, 39, 0.05) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.35;
+  }
+
+  /* CONTENT */
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  /* =========================
+     TYPOGRAPHY (SCOPED FIX)
+  ========================= */
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+    color: $TEXT;
+
+    span {
+      background: linear-gradient(90deg, $ACCENT, $ACCENT_2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: $MUTED;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $TEXT;
+  }
+
+  /* =========================
+     BADGE
+  ========================= */
+
+  .badge {
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    background: $CARD;
+    border: 1px solid $BORDER;
+    color: $TEXT;
+  }
+
+  /* =========================
+     BUTTONS
+  ========================= */
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    padding: 1rem 1.8rem;
+    border-radius: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+  }
+
+  .primary-btn {
+    background: linear-gradient(135deg, $ACCENT, $ACCENT_2);
+    color: white;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  .secondary-btn {
+    background: $CARD;
+    border: 1px solid $BORDER;
+    color: $TEXT;
+
+  }
+
+  /* =========================
+     STATS
+  ========================= */
+
+  .stats {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+
+    > div {
+      padding: 1rem 1.5rem;
+      border-radius: 14px;
+      border: 1px solid $BORDER;
+      background: $CARD;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: $ACCENT;
+      margin: 0;
+    }
+
+    span {
+      color: $MUTED;
+    }
+  }
+
+  .tagline {
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: $MUTED;
+  }
+
+  /* =========================
+     SECTIONS
+  ========================= */
+
+  .features,
+  .roadmap,
+  .brand,
+  .mockups {
+    margin-top: 7rem;
+  }
+
+  /* =========================
+     FEATURES
+  ========================= */
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feature-card {
+    background: $CARD;
+    border: 1px solid $BORDER;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.25s ease;
+
+    h3 {
+      margin-bottom: 0.6rem;
+      color: $TEXT;
+    }
+
+    p {
+      color: $MUTED;
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* =========================
+     ROADMAP
+  ========================= */
+
+  .roadmap ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .roadmap li {
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.8rem;
+    background: $CARD;
+    border: 1px solid $BORDER;
+    border-radius: 12px;
+    color: $TEXT;
+
+    &:hover {
+      transform: translateX(6px);
+    }
+  }
+
+  /* =========================
+     BRAND
+  ========================= */
+
+  .logo-box {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 3rem;
+    border-radius: 22px;
+    background: $CARD;
+    border: 1px solid $BORDER;
+
+    img {
+      width: 90px;
+      height: 90px;
+    }
+
+    p {
+      color: $TEXT;
+      font-weight: 600;
+    }
+  }
+
+  /* =========================
+     MOCKUPS
+  ========================= */
+
+.mockup-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: nowrap; // forces single row
+  margin-top: 2rem;
+
+  overflow-x: auto; // allows scroll on small screens
+  padding-bottom: 1rem;
+}
+
+.phone {
+  width: 140px;   // smaller, consistent size
+  min-width: 140px;
+  border-radius: 28px;
+  padding: 10px;
+  background: $CARD;
+  border: 1px solid $BORDER;
+  box-shadow: 0 10px 25px rgba(44, 42, 39, 0.08);
+  position: relative;
+  transition: transform 0.25s ease;
+
+  img {
+    width: 100%;
+    border-radius: 18px;
+    display: block;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 10px;
+    background: rgba(44, 42, 39, 0.08);
+    border-radius: 20px;
+  }
+}
+
+  /* =========================
+     ANIMATION
+  ========================= */
+
+  > div:not(.bg-grid) {
+    animation: fadeUp 0.8s ease both;
+  }
+}
+
+/* GLOBAL KEYFRAME (safe) */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

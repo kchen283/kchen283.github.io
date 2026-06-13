@@ -13,8 +13,7 @@ const items = [
     desc:
       "Track countries, states, and cities you've explored. Unlock achievements, complete travel \"quests\" , and discover the world in a fun new way.",
     navigate: "/unlock-earth",
-    featured: true,
-    status: "Coming Soon",
+    featured: true
   },
   {
     id: 2,
