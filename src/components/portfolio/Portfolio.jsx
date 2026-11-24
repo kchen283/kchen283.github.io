@@ -23,7 +23,8 @@ const items = [
     img: "/photos/realestate.png",
     desc:
       "Production real estate website integrated with MLS data, reviews, and neighborhood insights.",
-    navigate: "https://kchenrealtor.com",
+    status: "N/A",
+
   },
   {
     id: 3,
@@ -138,12 +139,14 @@ const Single = ({ item, handleNavigate }) => {
           ))}
         </div>
 
+      {item.status !== "N/A" && (
         <button
           disabled={item.status === "Coming Soon"}
           onClick={handleNavigate}
         >
           {item.status === "Coming Soon" ? "Coming Soon" : "View Project"}
         </button>
+      )}
       </div>
     </motion.section>
   );
